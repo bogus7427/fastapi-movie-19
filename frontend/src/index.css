@@ -87,6 +87,58 @@ button { font: inherit; cursor: pointer; border: 0; background: none; color: inh
 .arrow.left { left: 0; }
 .arrow.right { right: 0; }
 
+/* Quick menu (동그란 아이콘) */
+.quick { position: relative; margin: 0 0 40px; }
+.quick-list {
+  display: flex; gap: 28px; list-style: none; overflow-x: auto; padding: 16px 4% 8px;
+  scrollbar-width: none; scroll-behavior: smooth;
+}
+.quick-list::-webkit-scrollbar { display: none; }
+.quick-item { position: relative; display: flex; flex-direction: column; align-items: center; gap: 12px; width: 112px; }
+.quick-circle {
+  width: 112px; height: 112px; border-radius: 50%; overflow: hidden; display: grid; place-items: center;
+  background: #222; box-shadow: 0 4px 14px #0006;
+  transition: transform .35s cubic-bezier(.34,1.56,.64,1), box-shadow .35s;
+}
+.quick-circle img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s; }
+.quick-text { font-size: 22px; font-weight: 900; font-style: italic; letter-spacing: -.5px; color: #fff; text-shadow: 0 2px 6px #0005; }
+.quick-label {
+  font-size: 15px; font-weight: 600; color: #ccc; text-align: center; line-height: 1.35;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+  transition: color .3s;
+}
+.quick-badge {
+  position: absolute; top: 2px; right: 4px; width: 26px; height: 26px; border-radius: 50%;
+  background: #ff153c; color: #fff; font-size: 13px; font-weight: 800; display: grid; place-items: center;
+  border: 2px solid #000; transition: transform .35s;
+}
+/* 마우스 올렸을 때 움직임 */
+.quick-item:hover .quick-circle {
+  transform: translateY(-8px) scale(1.08);
+  box-shadow: 0 12px 28px #0009, 0 0 0 3px #fff;
+}
+.quick-item:hover .quick-circle img { transform: scale(1.15); }
+.quick-item:hover .quick-text { animation: wiggle .5s ease; }
+.quick-item:hover .quick-label { color: #fff; }
+.quick-item:hover .quick-badge { transform: translateY(-8px) rotate(360deg); transition: transform .6s; }
+@keyframes wiggle { 0%,100% { transform: rotate(0); } 25% { transform: rotate(-8deg); } 75% { transform: rotate(8deg); } }
+
+.quick-arrow {
+  position: absolute; top: 16px; height: 112px; width: 4%; z-index: 3; font-size: 52px; color: #fff;
+  opacity: 0; transition: opacity .3s;
+}
+.quick:hover .quick-arrow { opacity: .9; }
+.quick-arrow.left { left: 0; background: linear-gradient(90deg, #000, transparent); }
+.quick-arrow.right { right: 0; background: linear-gradient(270deg, #000, transparent); }
+
+@media (max-width: 768px) {
+  .quick-list { gap: 16px; }
+  .quick-item { width: 76px; }
+  .quick-circle { width: 76px; height: 76px; }
+  .quick-text { font-size: 15px; }
+  .quick-label { font-size: 13px; }
+}
+
 /* Modal */
 .modal-bg { position: fixed; inset: 0; z-index: 100; background: #000b; display: flex; justify-content: center; overflow-y: auto; padding: 40px 16px; }
 .modal { position: relative; width: 100%; max-width: 860px; height: fit-content; background: #181818; border-radius: 10px; overflow: hidden; }

@@ -3,6 +3,7 @@ import { fetchHome, searchMulti } from './api'
 import Header from './components/Header'
 import HeroBanner from './components/HeroBanner'
 import Row from './components/Row'
+import QuickMenu from './components/QuickMenu'
 import DetailModal from './components/DetailModal'
 import Footer from './components/Footer'
 
@@ -40,8 +41,11 @@ export default function App() {
         <main>
           {heroItems.length > 0 && <HeroBanner items={heroItems} onSelect={setSelected} />}
           <div className="rows">
+            {sections.length > 0 && (
+              <QuickMenu picks={sections.find((s) => s.key === 'popular_tv')?.items.slice(0, 6)} onSelect={setSelected} />
+            )}
             {sections.map((s, i) => (
-              <Row key={s.key} title={s.title} items={s.items} onSelect={setSelected} ranked={i === 0} />
+              <Row key={s.key} id={`row-${s.key}`} title={s.title} items={s.items} onSelect={setSelected} ranked={i === 0} />
             ))}
           </div>
         </main>

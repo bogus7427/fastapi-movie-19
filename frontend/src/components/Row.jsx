@@ -1,7 +1,7 @@
 import { useRef } from 'react'
 import { IMG } from '../api'
 
-export default function Row({ title, items, onSelect, ranked = false, wrap = false }) {
+export default function Row({ id, title, items, onSelect, ranked = false, wrap = false }) {
   const ref = useRef(null)
   const scroll = (dir) =>
     ref.current.scrollBy({ left: dir * ref.current.clientWidth * 0.9, behavior: 'smooth' })
@@ -9,7 +9,7 @@ export default function Row({ title, items, onSelect, ranked = false, wrap = fal
   const list = items.filter((m) => m.poster_path)
 
   return (
-    <section className="row">
+    <section className="row" id={id}>
       <h2>{title}</h2>
       <div className="row-wrap">
         {!wrap && <button className="arrow left" onClick={() => scroll(-1)}>‹</button>}
