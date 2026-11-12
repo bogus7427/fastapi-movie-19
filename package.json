@@ -1,0 +1,13 @@
+{
+  "name": "fastapi-movie-19",
+  "private": true,
+  "scripts": {
+    "setup": "pip install -r backend/requirements.txt && npm install --prefix frontend",
+    "dev": "concurrently -k -n BACK,FRONT -c blue,green \"npm run back\" \"npm run front\"",
+    "back": "python -m uvicorn main:app --reload --port 8000 --app-dir backend",
+    "front": "npm run dev --prefix frontend"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.5"
+  }
+}
