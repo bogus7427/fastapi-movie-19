@@ -1,4 +1,3 @@
-import { useRef } from 'react'
 import { IMG } from '../api'
 
 // 글자형 아이콘 (그라데이션 원)
@@ -15,8 +14,6 @@ const scrollToSection = (key) =>
   document.getElementById(`row-${key}`)?.scrollIntoView({ behavior: 'smooth', block: 'center' })
 
 export default function QuickMenu({ picks = [], onSelect }) {
-  const ref = useRef(null)
-  const scroll = (dir) => ref.current.scrollBy({ left: dir * ref.current.clientWidth * 0.8, behavior: 'smooth' })
 
   // 글자형 아이콘과 작품 이미지 아이콘을 번갈아 배치
   const items = []
@@ -27,8 +24,7 @@ export default function QuickMenu({ picks = [], onSelect }) {
 
   return (
     <nav className="quick" aria-label="바로가기">
-      <button className="quick-arrow left" onClick={() => scroll(-1)} aria-label="이전">‹</button>
-      <ul className="quick-list" ref={ref}>
+      <ul className="quick-list">
         {items.map((it, i) =>
           it.type === 'text' ? (
             <li key={`t${i}`}>
@@ -50,7 +46,6 @@ export default function QuickMenu({ picks = [], onSelect }) {
           )
         )}
       </ul>
-      <button className="quick-arrow right" onClick={() => scroll(1)} aria-label="다음">›</button>
     </nav>
   )
 }
